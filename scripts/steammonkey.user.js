@@ -13,7 +13,7 @@
     'use strict';
 
     // chroma config
-    let useChromaKey = true;
+    let useChromaKey = false;
     let chromaKey = '#0c141b';
     let chromaHeight = '370px';
 
@@ -54,7 +54,7 @@
     body.steamdeck .pageTest.active #testConfig .row {
         flex-direction: column !important;
     }
-    body.steamdeck #bottom {
+    body.steamdeck footer {
         background-color: transparent;
         width: 100%;
         height: 0px;
@@ -62,22 +62,22 @@
         left: 0;
         bottom: 0;
     }
-    body.steamdeck.chroma #bottom {
+    body.steamdeck.chroma footer {
         background-color: ${chromaKey};
         height: ${chromaHeight};
     }
     body.steamdeck.chroma #commandLineWrapper {
         background-color: transparent;
     }
-    body.steamdeck #bottom .keyTips {
+    body.steamdeck footer .keyTips {
         position: fixed;
         top: 30px;
         left: 480px;
     }
-    body.steamdeck #bottom .leftright {
+    body.steamdeck footer .leftright {
         display: none;
     }
-    body.steamdeck #bottom #commandLineMobileButton {
+    body.steamdeck footer #commandLineMobileButton {
         position: fixed;
         top: 235px;
         left: 45px;
@@ -95,8 +95,8 @@
     keyTips.className = 'keyTips';
     keyTips.innerHTML = `<key>tab</key> + <key>enter</key> - restart test<br>
     <key>steam</key>+<key>left dpad</key> - command line`;
-    let bottom = document.getElementById('bottom');
-    bottom.replaceChild(keyTips, document.querySelector('#bottom .keyTips'));
+    let bottom = document.getElementsByTagName('footer')[0];
+    bottom.replaceChild(keyTips, document.querySelector('footer .keyTips'));
 
     // Add the steam toggle button
     let button = document.createElement('button');
@@ -104,7 +104,9 @@
     button.className = 'textButton';
     button.textContent = 'steamdeck';
     // add button inside #menu div
-    let menu = document.getElementById('menu');
+    let menu = document.getElementsByTagName('nav')[0];
+    //const fourthChild = menu.children[2];
+    //menu.insertBefore(button, fourthChild.nextSibling);
     menu.appendChild(button);
 
     button.addEventListener('click', function() {
